@@ -1,25 +1,25 @@
 pipeline {
     agent any 
     stages {
-        stage('pull') { 
+        stage('Pull') { 
             steps {
-               git https://github.com/miamorgithub/Jenkins-fdec-b1.git
+               git branch: 'main', url: 'https://github.com/miamorgithub/Fdec-B1-Project.git'
             }
         }
         stage('Build') { 
             steps {
-                echo 'successully Build'
+              echo 'successfully build'
             }
         }
         stage('Test') { 
             steps {
-                echo 'successully Test'
+               echo 'successfully Test'
             }
         }
         stage('Deploy') { 
             steps {
-                echo 'successully deployed'
+               echo 'successfully Deploy'
             }
         }
-    }
+}
 }
