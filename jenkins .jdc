@@ -1,0 +1,25 @@
+pipeline {
+    agent any 
+    stages {
+        stage('pull') { 
+            steps {
+               git https://github.com/miamorgithub/Jenkins-fdec-b1.git
+            }
+        }
+        stage('Build') { 
+            steps {
+                echo 'successully Build'
+            }
+        }
+        stage('Test') { 
+            steps {
+                echo 'successully Test'
+            }
+        }
+        stage('Deploy') { 
+            steps {
+                echo 'successully deployed'
+            }
+        }
+    }
+}
