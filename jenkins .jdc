@@ -1,0 +1,26 @@
+pipeline {
+    agent any 
+    stages {
+        stage('Pull') { 
+            steps {
+               git branch: 'main', url: 'https://github.com/miamorgithub/Fdec-B1-Project.git'
+            }
+        }
+        stage('Build') { 
+            steps {
+              echo 'successfully build'
+            }
+        }
+        stage('Test') { 
+            steps {
+               echo 'successfully Test'
+            }
+        }
+        stage('Deploy') { 
+            steps {
+               echo 'successfully Deploy'
+            }
+        }
+}
+
+}
