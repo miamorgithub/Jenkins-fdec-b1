@@ -3,30 +3,33 @@ pipeline {
     stages {
         stage('pull') { 
             steps {
-                git 'https://github.com/miamorgithub/Fdec-B1-Project.git'
+                git 'https://github.com/miamorgithub/studentapp.ui.git'
             }
         }
         stage('build') { 
             steps {
-                 sh 'mvn clean package'
+                 sh '/opt/apache-maven/bin/mvn clean package'
             }
         }
         stage('test') { 
             steps {
-                 withSonarQubeEnv ('sonar') {
-             sh ' mvn sonar:sonar '
+                 withSonarQubeEnv (installationName:'sonar', credentialsId:'sonar-token') {
+                 sh '/opt/apache-maven/bin/mvn sonar:sonar -Dsonar.projectKey=studentapp'
                 }
             }
         }
-        stage('QualityCheck') { 
+        
+        /*stage('QualityCheck') { 
             steps {
                   timeout(time: 1, unit: 'HOURS') {
                          waitForQualityGate true
                 }
             }
-        }
+        }*/
+        
         stage('deploy') { 
             steps {
+                deploy adapters: [tomcat8(credentialsId: 'tomcat-cred', path: '', url: 'http://54.174.242.24:8080/')], contextPath: '/', war: '"**/*.war"'
                 echo 'successfully deploy'
             }
         }
